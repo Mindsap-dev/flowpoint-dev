@@ -1,0 +1,144 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.17/MicrosoftTeams.schema.json",
+  "id": "c0d362de-9683-48fd-b94a-072d15f7fe57",
+  "manifestVersion": "1.17",
+  "version": "1.0.0",
+  "name": {
+    "short": "Flowpoint",
+    "full": "Flowpoint Outlook Add-in"
+  },
+  "description": {
+    "short": "Archive emails and attachments to SharePoint directly from Outlook.",
+    "full": "Flowpoint allows users to archive Outlook messages and attachments to SharePoint libraries securely with one click."
+  },
+  "developer": {
+    "name": "Dialectic Engineering",
+    "websiteUrl": "https://dialecticeng.sharepoint.com",
+    "privacyUrl": "https://dialecticeng.sharepoint.com",
+    "termsOfUseUrl": "https://dialecticeng.sharepoint.com"
+  },
+  "icons": {
+    "outline": "assets/icon-32.png",
+    "color": "assets/icon-80.png"
+  },
+  "accentColor": "#230201",
+  "localizationInfo": {
+    "defaultLanguageTag": "en-US",
+    "additionalLanguages": []
+  },
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "Mailbox.ReadWrite.User",
+          "type": "Delegated"
+        }
+      ]
+    }
+  },
+  "validDomains": [
+    "localhost",
+    "graph.microsoft.com",
+    "login.microsoftonline.com",
+    "dialecticeng.sharepoint.com"
+  ],
+  "extensions": [
+    {
+      "requirements": {
+        "scopes": ["mail"],
+        "capabilities": [
+          {
+            "name": "Mailbox",
+            "minVersion": "1.13"
+          }
+        ]
+      },
+      "runtimes": [
+        {
+          "id": "TaskPaneRuntime",
+          "type": "general",
+          "code": {
+            "page": "https://localhost:3000/taskpane.html"
+          },
+          "lifetime": "short",
+          "actions": [
+            {
+              "id": "ShowTaskPane",
+              "type": "openPage",
+              "pinnable": true,
+              "view": "dashboard"
+            }
+          ]
+        },
+        {
+          "id": "CommandsRuntime",
+          "type": "general",
+          "code": {
+            "page": "https://localhost:3000/commands.html",
+            "script": "https://localhost:3000/commands.js"
+          },
+          "lifetime": "short",
+          "actions": [
+            {
+              "id": "openBulkArchiveDialog",
+              "type": "executeFunction"
+            }
+          ]
+        }
+      ],
+      "ribbons": [
+        {
+          "contexts": ["mailRead"],
+          "tabs": [
+            {
+              "builtInTabId": "TabDefault",
+              "groups": [
+                {
+                  "id": "FlowpointGroup",
+                  "label": "Flowpoint",
+                  "icons": [
+                    { "size": 16, "url": "https://localhost:3000/assets/icon-16.png" },
+                    { "size": 32, "url": "https://localhost:3000/assets/icon-32.png" },
+                    { "size": 80, "url": "https://localhost:3000/assets/icon-80.png" }
+                  ],
+                  "controls": [
+                    {
+                      "id": "ShowTaskPaneButton",
+                      "type": "button",
+                      "label": "Show Task Pane",
+                      "icons": [
+                        { "size": 16, "url": "https://localhost:3000/assets/icon-16.png" },
+                        { "size": 32, "url": "https://localhost:3000/assets/icon-32.png" },
+                        { "size": 80, "url": "https://localhost:3000/assets/icon-80.png" }
+                      ],
+                      "supertip": {
+                        "title": "Show Task Pane",
+                        "description": "Opens the Flowpoint task pane."
+                      },
+                      "actionId": "ShowTaskPane"
+                    },
+                    {
+                      "id": "BulkArchiveButton",
+                      "type": "button",
+                      "label": "Archive to SharePoint",
+                      "icons": [
+                        { "size": 16, "url": "https://localhost:3000/assets/icon-16.png" },
+                        { "size": 32, "url": "https://localhost:3000/assets/icon-32.png" },
+                        { "size": 80, "url": "https://localhost:3000/assets/icon-80.png" }
+                      ],
+                      "supertip": {
+                        "title": "Archive to SharePoint",
+                        "description": "Opens the Flowpoint Bulk Archive dialog."
+                      },
+                      "actionId": "openBulkArchiveDialog"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

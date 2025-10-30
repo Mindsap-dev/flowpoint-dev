@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OfficeApp
+  xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+  xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides"
+  xsi:type="MailApp">
+
+  <!-- Keep your GUID exactly the same -->
+  <Id>e4c5d7a2-9a4c-4f51-bf0d-123456789abc</Id>
+
+  <!-- Bumped to force reload -->
+  <Version>1.0.0.8</Version>
+
+  <ProviderName>Dialectic Engineering</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+  <DisplayName DefaultValue="Flowpoint Add-in"/>
+  <Description DefaultValue="Flowpoint taskpane add-in for Outlook"/>
+
+  <!-- Use LAN IP for OWA acceptance -->
+  <IconUrl DefaultValue="https://192.168.1.7:3000/assets/logo-filled.png"/>
+  <HighResolutionIconUrl DefaultValue="https://192.168.1.7:3000/assets/logo-filled.png"/>
+  <SupportUrl DefaultValue="https://dialecticeng.sharepoint.com"/>
+
+  <Hosts>
+    <Host Name="Mailbox"/>
+  </Hosts>
+
+  <Requirements>
+    <Sets DefaultMinVersion="1.1">
+      <Set Name="Mailbox"/>
+    </Sets>
+  </Requirements>
+
+  <Permissions>ReadWriteMailbox</Permissions>
+
+  <Rule xsi:type="RuleCollection" Mode="Or">
+    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read"/>
+  </Rule>
+
+  <DisableEntityHighlighting>false</DisableEntityHighlighting>
+
+  <!-- ────────────────────────────── -->
+  <!-- VersionOverrides v1.0 block   -->
+  <!-- ────────────────────────────── -->
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.0"
+                    xsi:type="VersionOverridesV1_0">
+
+    <Requirements>
+      <bt:Sets DefaultMinVersion="1.13">
+        <bt:Set Name="Mailbox"/>
+      </bt:Sets>
+    </Requirements>
+
+    <Hosts>
+      <Host xsi:type="MailHost">
+        <DesktopFormFactor>
+
+          <FunctionFile resid="functionFile"/>
+
+          <!-- Ribbon: Message Read surface -->
+          <ExtensionPoint xsi:type="MessageReadCommandSurface">
+            <OfficeTab id="TabDefault">
+              <Group id="FlowpointRibbonGroup">
+                <Label resid="flowpointGroupLabel"/>
+
+                <!-- Only the Archive Emails button -->
+                <Control xsi:type="Button" id="OpenTaskpaneButton">
+                  <Label resid="openTaskpaneLabel"/>
+                  <Supertip>
+                    <Title resid="openTaskpaneLabel"/>
+                    <Description resid="openTaskpaneDesc"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="icon16"/>
+                    <bt:Image size="32" resid="icon32"/>
+                    <bt:Image size="80" resid="icon80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <SourceLocation resid="Taskpane.Url"/>
+                  </Action>
+                </Control>
+
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+
+          <SupportsSharedFolders>true</SupportsSharedFolders>
+          <SupportsPinning>true</SupportsPinning>
+
+          <!-- (Placeholder group retained; no visible buttons in compose) -->
+          <ExtensionPoint xsi:type="MessageComposeCommandSurface">
+            <OfficeTab id="TabDefaultCompose">
+              <Group id="FlowpointComposeGroup">
+                <Label resid="flowpointGroupLabel"/>
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+
+    <Resources>
+      <bt:Images>
+        <bt:Image id="icon16" DefaultValue="https://192.168.1.7:3000/assets/logo-filled.png"/>
+        <bt:Image id="icon32" DefaultValue="https://192.168.1.7:3000/assets/logo-filled.png"/>
+        <bt:Image id="icon80" DefaultValue="https://192.168.1.7:3000/assets/logo-filled.png"/>
+      </bt:Images>
+
+      <bt:Urls>
+        <bt:Url id="Taskpane.Url" DefaultValue="https://192.168.1.7:3000/taskpane.html"/>
+        <bt:Url id="Commands.Url" DefaultValue="https://192.168.1.7:3000/commands.html"/>
+        <bt:Url id="Dialog.Url" DefaultValue="https://192.168.1.7:3000/dialog.html"/>
+        <bt:Url id="functionFile" DefaultValue="https://192.168.1.7:3000/commands.html"/>
+      </bt:Urls>
+
+      <bt:ShortStrings>
+        <bt:String id="flowpointGroupLabel" DefaultValue="Flowpoint"/>
+        <bt:String id="openTaskpaneLabel" DefaultValue="Archive Emails"/>
+      </bt:ShortStrings>
+
+      <bt:LongStrings>
+        <bt:String id="openTaskpaneDesc" DefaultValue="Open Flowpoint to archive the selected email to SharePoint."/>
+      </bt:LongStrings>
+    </Resources>
+  </VersionOverrides>
+
+  <!-- ────────────────────────────── -->
+  <!-- VersionOverrides v1.1 block   -->
+  <!-- ────────────────────────────── -->
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.1"
+                    xsi:type="VersionOverridesV1_1">
+    <Hosts>
+      <Host xsi:type="MailHost">
+        <Runtimes>
+          <Runtime resid="Taskpane.Url" lifetime="long" supportsPinning="true"/>
+          <Runtime resid="Dialog.Url" lifetime="short"/>
+        </Runtimes>
+      </Host>
+    </Hosts>
+  </VersionOverrides>
+</OfficeApp>

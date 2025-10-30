@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<OfficeApp
+  xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+  xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides"
+  xsi:type="MailApp">
+
+  <!-- Basic info -->
+  <Id>e4c5d7a2-9a4c-4f51-bf0d-123456789abc</Id>
+  <Version>1.0.0.0</Version>
+  <ProviderName>Dialectic Engineering</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+  <DisplayName DefaultValue="Flowpoint Ribbon"/>
+  <Description DefaultValue="Flowpoint Bulk Archive Test Add-in"/>
+  <IconUrl DefaultValue="https://www.contoso.com/assets/icon-32.png"/>
+  <HighResolutionIconUrl DefaultValue="https://www.contoso.com/assets/icon-80.png"/>
+  <SupportUrl DefaultValue="https://dialecticeng.sharepoint.com"/>
+
+  <Hosts>
+    <Host Name="Mailbox"/>
+  </Hosts>
+
+  <Requirements>
+    <Sets DefaultMinVersion="1.1">
+      <Set Name="Mailbox"/>
+    </Sets>
+  </Requirements>
+
+  <FormSettings>
+    <Form xsi:type="ItemRead">
+      <DesktopSettings>
+        <SourceLocation DefaultValue="https://www.contoso.com/commands.html"/>
+        <RequestedHeight>250</RequestedHeight>
+      </DesktopSettings>
+    </Form>
+  </FormSettings>
+
+  <Permissions>ReadWriteMailbox</Permissions>
+
+  <Rule xsi:type="RuleCollection" Mode="Or">
+    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read"/>
+  </Rule>
+
+  <DisableEntityHighlighting>false</DisableEntityHighlighting>
+
+  <!-- VersionOverrides section for Outlook -->
+  <VersionOverrides
+    xmlns="http://schemas.microsoft.com/office/mailappversionoverrides"
+    xsi:type="VersionOverridesV1_0">
+
+    <Requirements>
+      <bt:Sets DefaultMinVersion="1.3">
+        <bt:Set Name="Mailbox"/>
+      </bt:Sets>
+    </Requirements>
+
+    <Hosts>
+      <Host xsi:type="MailHost">
+        <DesktopFormFactor>
+
+          <FunctionFile resid="functionFile"/>
+
+          <ExtensionPoint xsi:type="MessageReadCommandSurface">
+            <OfficeTab id="TabDefault">
+              <Group id="FlowpointRibbonGroup">
+                <Label resid="flowpointGroupLabel"/>
+                <Control xsi:type="Button" id="BulkArchiveButton">
+                  <Label resid="bulkArchiveLabel"/>
+                  <Supertip>
+                    <Title resid="bulkArchiveLabel"/>
+                    <Description resid="bulkArchiveDesc"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="icon16"/>
+                    <bt:Image size="32" resid="icon32"/>
+                    <bt:Image size="80" resid="icon80"/>
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>openBulkArchiveDialog</FunctionName>
+                  </Action>
+                </Control>
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+
+    <Resources>
+      <bt:Images>
+        <bt:Image id="icon16" DefaultValue="https://www.contoso.com/assets/icon-16.png"/>
+        <bt:Image id="icon32" DefaultValue="https://www.contoso.com/assets/icon-32.png"/>
+        <bt:Image id="icon80" DefaultValue="https://www.contoso.com/assets/icon-80.png"/>
+      </bt:Images>
+
+      <bt:Urls>
+        <bt:Url id="functionFile" DefaultValue="https://www.contoso.com/commands.html"/>
+        <bt:Url id="dialogUrl" DefaultValue="https://www.contoso.com/dialog.html"/>
+      </bt:Urls>
+
+      <bt:ShortStrings>
+        <bt:String id="flowpointGroupLabel" DefaultValue="Flowpoint Bulk Archive"/>
+        <bt:String id="bulkArchiveLabel" DefaultValue="Bulk Archive???"/>
+      </bt:ShortStrings>
+
+      <bt:LongStrings>
+        <bt:String id="bulkArchiveDesc" DefaultValue="Open the Flowpoint Bulk Archive modal window."/>
+      </bt:LongStrings>
+    </Resources>
+  </VersionOverrides>
+</OfficeApp>
+
+
+

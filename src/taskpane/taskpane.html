@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Flowpoint Task Pane</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- ✅ Load Office.js before anything else -->
+    <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+
+    <!-- 🛡 Guard for “Office is not defined” race -->
+    <script>
+      if (typeof Office === "undefined") window.Office = {};
+    </script>
+
+    <style>
+      html, body, #container {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background: #2b2b2b;
+        color: white;
+        font-family: "Segoe UI", sans-serif;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="container"></div>
+
+    <!-- ✅ Ensure webpack bundles resolve correctly -->
+    <script>
+      __webpack_public_path__ = "./";
+    </script>
+  </body>
+</html>
