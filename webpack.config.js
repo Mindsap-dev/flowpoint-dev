@@ -4,8 +4,9 @@ const devCerts = require("office-addin-dev-certs");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+// ✅ URLs for dev vs production
 const urlDev = "https://localhost:3000/";
-const urlProd = "https://www.contoso.com/"; // Replace with production URL
+const urlProd = "https://mindsap-dev.github.io/flowpoint-dev/"; // ✅ GitHub Pages public URL
 
 async function getHttpsOptions() {
   const httpsOptions = await devCerts.getHttpsServerOptions();
@@ -18,19 +19,14 @@ module.exports = async (env, options) => {
   return {
     devtool: "source-map",
     entry: {
-      // ✅ Primary taskpane bundle
-      taskpane: "./src/taskpane/entry.tsx",
-
-      // ✅ Ribbon commands script
-      commands: "./src/commands/commands.ts",
-
-      // ✅ Bulk Archive dialog window
-      dialog: "./src/commands/dialog.tsx",
+      taskpane: "./src/taskpane/entry.tsx",      // Taskpane bundle
+      commands: "./src/commands/commands.ts",    // Ribbon commands
+      dialog: "./src/commands/dialog.tsx",       // Bulk Archive dialog
     },
     output: {
       path: path.resolve(__dirname, "dist"),
       filename: "[name].js",
-      publicPath: urlDev,
+      publicPath: dev ? urlDev : urlProd,        // 👈 Use GitHub Pages in production
       clean: true,
     },
     resolve: {
@@ -56,8 +52,9 @@ module.exports = async (env, options) => {
         },
       ],
     },
+
     plugins: [
-      // ✅ Taskpane HTML
+      // ✅ HTML pages for each entry
       new HtmlWebpackPlugin({
         filename: "taskpane.html",
         template: "./src/taskpane/taskpane.html",
@@ -67,10 +64,10 @@ module.exports = async (env, options) => {
         minify: false,
         cache: false,
         templateParameters: {
-          officeJsUrl: "https://appsforoffice.microsoft.com/lib/1/hosted/office.js",
+          officeJsUrl:
+            "https://appsforoffice.microsoft.com/lib/1/hosted/office.js",
         },
       }),
-
       new HtmlWebpackPlugin({
         filename: "commands.html",
         template: "./src/commands/commands.html",
@@ -80,10 +77,10 @@ module.exports = async (env, options) => {
         minify: false,
         cache: false,
         templateParameters: {
-          officeJsUrl: "https://appsforoffice.microsoft.com/lib/1/hosted/office.js",
+          officeJsUrl:
+            "https://appsforoffice.microsoft.com/lib/1/hosted/office.js",
         },
       }),
-
       new HtmlWebpackPlugin({
         filename: "dialog.html",
         template: "./src/commands/dialog.html",
@@ -93,11 +90,12 @@ module.exports = async (env, options) => {
         minify: false,
         cache: false,
         templateParameters: {
-          officeJsUrl: "https://appsforoffice.microsoft.com/lib/1/hosted/office.js",
+          officeJsUrl:
+            "https://appsforoffice.microsoft.com/lib/1/hosted/office.js",
         },
       }),
 
-      // ✅ Copy manifest + assets
+      // ✅ Copy manifest and replace URLs for production
       new CopyWebpackPlugin({
         patterns: [
           { from: "assets/*", to: "assets/[name][ext][query]" },
@@ -114,26 +112,26 @@ module.exports = async (env, options) => {
       }),
     ],
 
-devServer: {
-  port: 3000,
-  hot: false,
-  liveReload: true,
-  historyApiFallback: true,
-  static: {
-    directory: path.join(__dirname, "dist"),
-    watch: true,
-    serveIndex: true,
-  },
-  headers: {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "*",
-  },
-  server: {
-    type: "https",
-    options: await getHttpsOptions(),
-  },
-  allowedHosts: "all",
-},
-
+    // ✅ HTTPS dev server for localhost builds
+    devServer: {
+      port: 3000,
+      hot: false,
+      liveReload: true,
+      historyApiFallback: true,
+      static: {
+        directory: path.join(__dirname, "dist"),
+        watch: true,
+        serveIndex: true,
+      },
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "*",
+      },
+      server: {
+        type: "https",
+        options: await getHttpsOptions(),
+      },
+      allowedHosts: "all",
+    },
   };
 };
