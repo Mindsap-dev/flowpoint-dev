@@ -13,8 +13,8 @@
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="Flowpoint Ribbon"/>
   <Description DefaultValue="Flowpoint Bulk Archive Test Add-in"/>
-  <IconUrl DefaultValue="https://www.contoso.com/assets/icon-32.png"/>
-  <HighResolutionIconUrl DefaultValue="https://www.contoso.com/assets/icon-80.png"/>
+  <IconUrl DefaultValue="https://mindsap-dev.github.io/flowpoint-dev/assets/icon-32.png"/>
+  <HighResolutionIconUrl DefaultValue="https://mindsap-dev.github.io/flowpoint-dev/assets/icon-80.png"/>
   <SupportUrl DefaultValue="https://dialecticeng.sharepoint.com"/>
 
   <Hosts>
@@ -30,7 +30,7 @@
   <FormSettings>
     <Form xsi:type="ItemRead">
       <DesktopSettings>
-        <SourceLocation DefaultValue="https://www.contoso.com/commands.html"/>
+        <SourceLocation DefaultValue="https://mindsap-dev.github.io/flowpoint-dev/commands.html"/>
         <RequestedHeight>250</RequestedHeight>
       </DesktopSettings>
     </Form>
@@ -90,14 +90,14 @@
 
     <Resources>
       <bt:Images>
-        <bt:Image id="icon16" DefaultValue="https://www.contoso.com/assets/icon-16.png"/>
-        <bt:Image id="icon32" DefaultValue="https://www.contoso.com/assets/icon-32.png"/>
-        <bt:Image id="icon80" DefaultValue="https://www.contoso.com/assets/icon-80.png"/>
+        <bt:Image id="icon16" DefaultValue="https://mindsap-dev.github.io/flowpoint-dev/assets/icon-16.png"/>
+        <bt:Image id="icon32" DefaultValue="https://mindsap-dev.github.io/flowpoint-dev/assets/icon-32.png"/>
+        <bt:Image id="icon80" DefaultValue="https://mindsap-dev.github.io/flowpoint-dev/assets/icon-80.png"/>
       </bt:Images>
 
       <bt:Urls>
-        <bt:Url id="functionFile" DefaultValue="https://www.contoso.com/commands.html"/>
-        <bt:Url id="dialogUrl" DefaultValue="https://www.contoso.com/dialog.html"/>
+        <bt:Url id="functionFile" DefaultValue="https://mindsap-dev.github.io/flowpoint-dev/commands.html"/>
+        <bt:Url id="dialogUrl" DefaultValue="https://mindsap-dev.github.io/flowpoint-dev/dialog.html"/>
       </bt:Urls>
 
       <bt:ShortStrings>

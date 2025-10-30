@@ -12,8 +12,8 @@
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="Flowpoint Add-in"/>
   <Description DefaultValue="Flowpoint taskpane add-in for Outlook"/>
-  <IconUrl DefaultValue="https://www.contoso.com/assets/logo-filled.png"/>
-  <HighResolutionIconUrl DefaultValue="https://www.contoso.com/assets/logo-filled.png"/>
+  <IconUrl DefaultValue="https://mindsap-dev.github.io/flowpoint-dev/assets/logo-filled.png"/>
+  <HighResolutionIconUrl DefaultValue="https://mindsap-dev.github.io/flowpoint-dev/assets/logo-filled.png"/>
   <SupportUrl DefaultValue="https://dialecticeng.sharepoint.com"/>
 
   <Hosts>
@@ -98,16 +98,16 @@
     <!-- 🟩 Resource Section -->
     <Resources>
       <bt:Images>
-        <bt:Image id="icon16" DefaultValue="https://www.contoso.com/assets/logo-filled.png"/>
-        <bt:Image id="icon32" DefaultValue="https://www.contoso.com/assets/logo-filled.png"/>
-        <bt:Image id="icon80" DefaultValue="https://www.contoso.com/assets/logo-filled.png"/>
+        <bt:Image id="icon16" DefaultValue="https://mindsap-dev.github.io/flowpoint-dev/assets/logo-filled.png"/>
+        <bt:Image id="icon32" DefaultValue="https://mindsap-dev.github.io/flowpoint-dev/assets/logo-filled.png"/>
+        <bt:Image id="icon80" DefaultValue="https://mindsap-dev.github.io/flowpoint-dev/assets/logo-filled.png"/>
       </bt:Images>
 
       <bt:Urls>
-        <bt:Url id="Taskpane.Url" DefaultValue="https://www.contoso.com/taskpane.html"/>
-        <bt:Url id="Commands.Url" DefaultValue="https://www.contoso.com/commands.html"/>
-        <bt:Url id="Dialog.Url" DefaultValue="https://www.contoso.com/dialog.html"/>
-        <bt:Url id="functionFile" DefaultValue="https://www.contoso.com/commands.html"/>
+        <bt:Url id="Taskpane.Url" DefaultValue="https://mindsap-dev.github.io/flowpoint-dev/taskpane.html"/>
+        <bt:Url id="Commands.Url" DefaultValue="https://mindsap-dev.github.io/flowpoint-dev/commands.html"/>
+        <bt:Url id="Dialog.Url" DefaultValue="https://mindsap-dev.github.io/flowpoint-dev/dialog.html"/>
+        <bt:Url id="functionFile" DefaultValue="https://mindsap-dev.github.io/flowpoint-dev/commands.html"/>
       </bt:Urls>
 
       <bt:ShortStrings>
